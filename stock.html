@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Stock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Gestión de Stock</h1>
+  <div id="stock-lista"></div>
+
+  <script>
+    fetch('http://127.0.0.1:5000/api/productos')
+      .then(res => res.json())
+      .then(data => {
+        const cont = document.getElementById('stock-lista');
+        cont.innerHTML = '';
+        data.forEach(p => {
+          cont.innerHTML += `
+            <div class="producto">
+              <h3>${p.nombre}</h3>
+              <p>Stock actual: <input type="number" id="stock_${p.id_producto}" value="${p.stock}" min="0">
+              <button onclick="actualizarStock(${p.id_producto})">Guardar</button></p>
+            </div>
+          `;
+        });
+      });
+
+    function actualizarStock(id) {
+      const nuevoStock = document.getElementById(`stock_${id}`).value;
+      fetch('http://127.0.0.1:5000/api/actualizar_stock?user=admin', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({id_producto: id, stock: nuevoStock})
+      })
+      .then(res => res.json())
+      .then(msg => alert(msg.mensaje || msg.error))
+      .catch(err => console.error(err));
+    }
+  </script>
+</body>
+</html>

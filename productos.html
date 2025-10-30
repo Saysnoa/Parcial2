@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos | Clean Market</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background-color: #152f55;
+      box-shadow: 0 2px 8px #93c352;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img { height: 70px; }
+    .logo span { font-size: 1.3rem; font-weight: 700; color: #fff; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav ul li a:hover { color: #93c352; }
+
+    /* Botón login */
+    .btn-login {
+      background-color: #0072ce;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .btn-login:hover { background-color: #93c352; }
+
+    /* ===== CONTENIDO PRINCIPAL ===== */
+    main {
+      max-width: 1200px;
+      margin: 60px auto;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .filtros-productos {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filtro-btn {
+      padding: 8px 16px;
+      border: 1px solid #0072ce;
+      background: white;
+      color: #0072ce;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filtro-btn.activo, .filtro-btn:hover {
+      background: #0072ce;
+      color: white;
+    }
+
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .producto {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      background: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .producto img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .producto h3 { color: #333; margin-bottom: 10px; }
+    .precio { font-size: 1.2rem; font-weight: bold; color: #0072ce; margin-bottom: 10px; }
+    .precio-anterior { text-decoration: line-through; color: #999; font-size: 0.9rem; margin-left: 10px; }
+
+    .descuento {
+      background: #dc3545;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .btn-agregar {
+      background: #0072ce;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-agregar:hover { background: #005fa3; }
+    .btn-agregar.agregado { background: #28a745; }
+
+    .paginacion {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .pagina-btn {
+      background: #ddd;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .pagina-btn.activo {
+      background: #0072ce;
+      color: white;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      margin: 40px 0;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src="imagenes/logo.png" alt="Logo de la tienda">
+        <span>Mercado de Limpieza</span>
+      </div>
+
+      <nav>
+        <ul class="navbar-menu">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html" class="activo">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="register.html">Crear usuario</a></li>
+          <li><a href="login.html" id="nav-login" class="btn-login">Iniciar Sesión</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== CONTENIDO ===== -->
+  <main>
+    <h1>Nuestros Productos</h1>
+    <p>Encontrá todo lo que necesitás para tu hogar</p>
+
+    <div class="filtros-productos">
+      <button class="filtro-btn activo">Todos</button>
+      <button class="filtro-btn">Limpieza</button>
+      <button class="filtro-btn">Cocina</button>
+      <button class="filtro-btn">Baño</button>
+      <button class="filtro-btn">Ofertas</button>
+    </div>
+
+    <div class="productos-grid" id="productosGrid"></div>
+    <div class="paginacion" id="paginacion"></div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-copy">
+      <p>© 2025 Clean Market. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPT DE PRODUCTOS ===== -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const imagenPorDefecto = "imagenes/placeholder.png";
+
+    const productos = [
+      { nombre: "Detergente Líquido", precio: 1200, categoria: "limpieza", img: "https://rutren.com/wp-content/uploads/2019/08/APRO-012B-900x900.jpg" },
+      { nombre: "Lavandina Concentrada", precio: 950, categoria: "limpieza", img: "https://carrefourar.vtexassets.com/arquivos/ids/545898/7793253006709_01.jpg" },
+      { nombre: "Limpiavidrios", precio: 800, categoria: "limpieza", img: "https://laboratoriosorion.com/wp-content/uploads/2019/11/Limpiavidrios-650ml.jpg" },
+      { nombre: "Desinfectante Floral", precio: 1100, categoria: "limpieza", img: "" },
+
+      { nombre: "Desengrasante de Cocina", precio: 1250, categoria: "cocina", img: "https://images.fravega.com/f300/8fdc9b6f8833a8302d7c516bdc28e0f4.jpg" },
+      { nombre: "Papel Absorbente", precio: 800, categoria: "cocina", img: "" },
+      { nombre: "Jabón para Platos", precio: 750, categoria: "cocina", img: "https://http2.mlstatic.com/D_NQ_NP_780261-MLA44273928435_122020-O.webp" },
+      { nombre: "Toalla de Cocina", precio: 600, categoria: "cocina", img: "https://d2j6dbq0eux0bg.cloudfront.net/images/64939489/2759043532.jpg" },
+
+      { nombre: "Limpiador de Baño", precio: 890, categoria: "baño", img: "https://jumboargentina.vtexassets.com/arquivos/ids/703740/Limpiador-L-quido-Para-Ba-o-Cif-500-Ml-1-876327.jpg" },
+      { nombre: "Pastilla para Inodoro", precio: 500, categoria: "baño", img: "" },
+      { nombre: "Desodorante de Ambiente", precio: 520, categoria: "baño", img: "https://www.supermercadosdia.com.ar/media/catalog/product/cache/f5df6ddce0b4c36075dd6e5d137ccd00/7/7/7790520024001_02.jpg" },
+      { nombre: "Esponja Antibacteriana", precio: 650, categoria: "baño", img: "" },
+
+      { nombre: "Suavizante de Ropa", precio: 1300, categoria: "ofertas", descuento: "25%", precioAnterior: 1750, img: "https://abarrotesabansa.com/wp-content/uploads/2024/04/ROMANCE-2.8L.png" },
+      { nombre: "Guantes de Limpieza", precio: 420, categoria: "ofertas", descuento: "30%", precioAnterior: 600, img: "" },
+      { nombre: "Cepillo Multiuso", precio: 380, categoria: "ofertas", descuento: "20%", precioAnterior: 480, img: "https://cdnx.jumpseller.com/utili-office-rover/image/50028137/resize/1200/1200?1719156001" },
+      { nombre: "Jabón Líquido para Manos", precio: 650, categoria: "ofertas", descuento: "24%", precioAnterior: 850, img: "" },
+    ];
+
+    const grid = document.getElementById("productosGrid");
+    const paginacion = document.getElementById("paginacion");
+    const filtros = document.querySelectorAll(".filtro-btn");
+
+    let paginaActual = 1;
+    const productosPorPagina = 4;
+    let categoriaActual = "todos";
+
+    function renderProductos() {
+      grid.innerHTML = "";
+      let filtrados = productos.filter(p => categoriaActual === "todos" || p.categoria === categoriaActual);
+      const totalPaginas = Math.ceil(filtrados.length / productosPorPagina);
+      const inicio = (paginaActual - 1) * productosPorPagina;
+      const visibles = filtrados.slice(inicio, inicio + productosPorPagina);
+
+      visibles.forEach(p => {
+        const div = document.createElement("div");
+        div.classList.add("producto");
+        const imgSrc = p.img && p.img.trim() !== "" ? p.img : imagenPorDefecto;
+
+        div.innerHTML = `
+          ${p.descuento ? `<span class="descuento">${p.descuento}</span>` : ""}
+          <img src="${imgSrc}" alt="${p.nombre}" onerror="this.src='${imagenPorDefecto}'">
+          <h3>${p.nombre}</h3>
+          <p>${p.categoria.charAt(0).toUpperCase() + p.categoria.slice(1)}</p>
+          <span class="precio">$${p.precio}</span>
+          ${p.precioAnterior ? `<span class="precio-anterior">$${p.precioAnterior}</span>` : ""}
+          <button class="btn-agregar"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>
+        `;
+        grid.appendChild(div);
+      });
+
+      paginacion.innerHTML = "";
+      for (let i = 1; i <= totalPaginas; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.classList.add("pagina-btn");
+        if (i === paginaActual) btn.classList.add("activo");
+        btn.addEventListener("click", () => { paginaActual = i; renderProductos(); });
+        paginacion.appendChild(btn);
+      }
+
+      document.querySelectorAll(".btn-agregar").forEach(b => {
+        b.addEventListener("click", () => {
+          b.innerHTML = '<i class="fas fa-check"></i> Agregado';
+          b.classList.add("agregado");
+          setTimeout(() => {
+            b.innerHTML = '<i class="fas fa-shopping-cart"></i> Agregar al carrito';
+            b.classList.remove("agregado");
+          }, 2000);
+        });
+      });
+    }
+
+    filtros.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filtros.forEach(b => b.classList.remove("activo"));
+        btn.classList.add("activo");
+        categoriaActual = btn.textContent.toLowerCase();
+        paginaActual = 1;
+        renderProductos();
+      });
+    });
+
+    renderProductos();
+  });
+  </script>
+</body>
+</html>

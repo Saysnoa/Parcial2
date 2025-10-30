@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clean Market | Limpieza y Bazar</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background-color: #152f55;
+      box-shadow: 0 2px 8px #93c352;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img { height: 70px; }
+    .logo span { font-size: 1.3rem; font-weight: 700; color: #fff; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav ul li a:hover {
+      color: #93c352;
+    }
+
+    /* Usuario logueado */
+    #usuario-logueado {
+      color: #fff;
+      background: #0072ce;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 60px auto;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src="imagenes/logo.png" alt="Logo de la tienda">
+        <span>Mercado de Limpieza</span>
+      </div>
+
+      <nav>
+        <ul class="navbar-menu">
+          <li><a href="index.html" class="activo">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="register.html">Crear usuario</a></li>
+          <li><a href="login.html" id="nav-login">Iniciar Sesión</a></li>
+        </ul>
+      </nav>
+
+      <div id="usuario-logueado">
+        <i class="fa-solid fa-user"></i>
+        <span id="nombre-usuario"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <main>
+    <h1>Bienvenido a Clean Market</h1>
+    <p>Acá vas a encontrar productos de limpieza, bazar y mucho más.</p>
+
+    <section class="banner">
+      <img src="https://thumbs.dreamstime.com/b/promoci%C3%B3n-oferta-especial-sello-imprimible-espa%C3%B1ol-del-negocio-84919628.jpg" 
+           alt="Promoción especial" 
+           style="width:540px;height:auto;display:block;margin:0 auto 16px auto;">
+      <div class="banner-texto">
+        <h1>Ofertas de limpieza y bazar</h1>
+        <p>Los mejores precios por mayor. ¡Descuentos por tiempo limitado!</p>
+        <a href="productos.html" class="btn">Ver productos</a>
+      </div>
+    </section>
+
+    <section class="productos">
+      <h2>Productos Destacados</h2>
+      <div class="grid-productos">
+        <div class="producto">
+          <img src="https://i5.walmartimages.com.mx/gr/images/product-images/img_large/00750043520892L.jpg" alt="Detergente Premium">
+          <h3>Detergente Premium</h3>
+          <p>$1.200</p>
+          <a href="#" class="btn">Comprar</a>
+        </div>
+
+        <div class="producto">
+          <img src="https://cdnx.jumpseller.com/utili-office-rover/image/50028137/resize/1200/1200?1719156001" alt="Escoba Profesional">
+          <h3>Escoba Profesional</h3>
+          <p>$2.400</p>
+          <a href="#" class="btn">Comprar</a>
+        </div>
+
+        <div class="producto">
+          <img src="https://plazavea.vteximg.com.br/arquivos/ids/16234836-1000-1000/image-1165986fafa641389308eeea5764560c.jpg" alt="Set de esponjas">
+          <h3>Set de esponjas</h3>
+          <p>$900</p>
+          <a href="#" class="btn">Comprar</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="beneficios">
+      <div class="beneficio">
+        <img src="imagenes/iconos/entrega.png" alt="Envíos a todo el país">
+        <h3>Envíos a todo el país</h3>
+        <p>Recibí tus productos donde estés, rápido y seguro.</p>
+      </div>
+
+      <div class="beneficio">
+        <img src="imagenes/iconos/descuento.png" alt="Descuentos mayoristas">
+        <h3>Descuentos mayoristas</h3>
+        <p>Comprá más y pagá menos con precios por volumen.</p>
+      </div>
+
+      <div class="beneficio">
+        <img src="imagenes/iconos/pago.png" alt="Múltiples medios de pago">
+        <h3>Múltiples medios de pago</h3>
+        <p>Tarjetas, transferencia o efectivo. ¡Elegí tu forma de pagar!</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-contenedor">
+      <div class="footer-col">
+        <h3>Clean Market</h3>
+        <p>Tu distribuidora de artículos de limpieza y bazar al mejor precio. Venta por mayor y menor.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Enlaces rápidos</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>📍 Av. Gdor. Ricardo Videla 2163, M5519 San José, Mendoza</li>
+          <li>📞 +54 9 2617 55-9691</li>
+          <li>📧 contacto@cleanmarket.com</li>
+        </ul>
+      </div>
+
+      <div class="footer-col redes">
+        <h4>Seguinos</h4>
+        <div class="iconos-redes">
+          <a href="https://www.facebook.com/StoreCleanMarket/" target="_blank">
+            <img src="imagenes/iconos/facebook.png" alt="Facebook">
+          </a>
+          <a href="https://www.instagram.com/cleanmarket.store/" target="_blank">
+            <img src="imagenes/iconos/instagram.png" alt="Instagram">
+          </a>
+          <a href="https://wa.me/2617559691?text=¡Hola!%20Quisiera%20hacer%20un%20pedido%20de%20productos%20CleanMarket." target="_blank">
+            <img src="imagenes/iconos/whatsapp.png" alt="WhatsApp">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-copy">
+      <p>© 2025 Clean Market. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="common.js"></script>
+</body>
+</html>

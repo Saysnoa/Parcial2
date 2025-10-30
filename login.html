@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión | Clean Market</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #152f55;
+      box-shadow: 0 2px 8px #93c352;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img { height: 70px; }
+
+    .logo span {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav ul li a:hover { color: #93c352; }
+
+    .login-container {
+      max-width: 400px;
+      margin: 60px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-container h2 {
+      color: #0072ce;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .login-container label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      text-align: left;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: inherit;
+    }
+
+    .login-container button {
+      width: 100%;
+      background-color: #0072ce;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .login-container button:hover {
+      background-color: #005fa3;
+    }
+
+    #mensaje {
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src="imagenes/logo.png" alt="Logo de la tienda">
+        <span>Mercado de Limpieza</span>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="ofertas.html">Ofertas</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="register.html">Crear usuario</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== CONTENIDO LOGIN ===== -->
+  <main>
+    <div class="login-container">
+      <h2>Iniciar Sesión</h2>
+      <form id="loginForm">
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" placeholder="Tu usuario" required>
+
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" placeholder="Tu contraseña" required>
+
+        <button type="submit">Entrar</button>
+        <p id="mensaje"></p>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-copy">
+      <p>© 2025 Clean Market. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const usuario = document.getElementById("usuario").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const mensaje = document.getElementById("mensaje");
+
+    try {
+      const res = await fetch("http://127.0.0.1:5000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario, password })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("usuario", JSON.stringify(data));
+        mensaje.textContent = "✅ Inicio de sesión exitoso.";
+        mensaje.style.color = "green";
+        setTimeout(() => window.location.href = "index.html", 1200);
+      } else {
+        mensaje.textContent = data.error || "❌ Usuario o contraseña incorrectos.";
+        mensaje.style.color = "red";
+      }
+    } catch (err) {
+      mensaje.textContent = "❌ Error de conexión con el servidor.";
+      mensaje.style.color = "red";
+    }
+  });
+  </script>
+</body>
+</html>
